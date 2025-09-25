@@ -1,6 +1,5 @@
 import pandas as pd
 import json
-import string
 import random
 
 """
@@ -28,6 +27,18 @@ keys = {}
 for elemento in lista_alumnos:
     keys[elemento[0]] = id_generator(16)
 
+
+"""
+Generador keys ayudantes hasta 9.
+"""
+def generador_ayudantes(cantidad=4, diccionario={}):
+    if cantidad > 9:
+        raise Exception ("Ingresa un numero menor a 10 :D")
+    for i in range(cantidad):
+        diccionario[f"KEYDEV_{i}"] = f"IIC1001DebugAY0{i}"
+    return diccionario
+
+generador_ayudantes(8, keys)
 """
 Escritura del json de los numeros de alumnos.
 """

@@ -2,7 +2,6 @@
 
 Este repositorio almacena todo lo necesario para poder correr la API necesaria para WEB-3
 
-
 # Instalaciones escenciales:
 
 ## Windows:
@@ -14,3 +13,49 @@ Este repositorio almacena todo lo necesario para poder correr la API necesaria p
    npm -v 
    # Estos comandos deberian indicarte la versión de node y npm. Si instalaste todo bien entonces debería aparecerte una versión superior o igual a 22.20.0.
    ```
+3. Inicializa el proyecto con
+   ```
+   npm init -y
+   # Esto crea package.json
+   ```
+
+4. Instalar paquetes necesarios:
+   ```
+   npm install express sqlite3
+   # express → framework del servidor.
+   # sqlite3 → base de datos SQLite para almacenar los curriculum.
+   npm install --save-dev nodemon
+   # nodemon → Permite reiniciar el server automáticamente en caso de hacer cambios (OPCIONAL)
+   ```
+5. opcional:
+   Instalar ngrok para probar la api local en internet.
+   ```
+   npm install --save-dev ngrok
+   ```
+   Normalmente esto les pedira un authtoken, para esto deben ingresar en https://dashboard.ngrok.com/signup y registrarse.
+   una vez que tengan su authtoken deben usar:
+   ```
+   npx ngrok config add-authtoken Authtoken
+   ```
+## Levantar en local:
+1. Para arrancar el servidor en local (solo uso propio):
+   ```
+   npm install
+   npm start # Primera vez
+   npm run dev # Si instalaste nodemon
+   ```
+   Con esto podras hacer consultas desde la ip y postman de forma LOCAL. 
+2. Para arrancar el servidor publicamente, debentener instalado ngrok (paso 5), correr los siguientes comandos EN TERMINALES DISTINTAS.
+   ```
+   npm install
+   #Si no instalaste nodemon:
+   npm start  
+   #Si instalaste nodemon:
+   npm run dev 
+
+   #Para arrancar el servidor con ngrok, desde otra terminal debes correr:
+   npx ngrok http XXXX <Cambiar por el puerto asignado>
+   ```
+
+# Metodos de la API:
+ --WIP--

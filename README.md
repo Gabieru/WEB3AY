@@ -21,7 +21,7 @@ Este repositorio almacena todo lo necesario para poder correr la API necesaria p
 
 4. Instalar paquetes necesarios:
    ```
-   npm install express sqlite3
+   npm install express sqlite3 express-rate-limit 
    # express → framework del servidor.
    # sqlite3 → base de datos SQLite para almacenar los curriculum.
    npm install --save-dev nodemon

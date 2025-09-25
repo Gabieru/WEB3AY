@@ -35,7 +35,7 @@ def generador_ayudantes(cantidad=4, diccionario={}):
     if cantidad > 9:
         raise Exception ("Ingresa un numero menor a 10 :D")
     for i in range(cantidad):
-        diccionario[f"KEYDEV_{i}"] = f"IIC1001DebugAY0{i}"
+        diccionario[f'KEYDEV_{i}'] = f"IIC1001DebugAY0{i}"
     return diccionario
 
 generador_ayudantes(8, keys)

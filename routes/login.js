@@ -30,4 +30,29 @@ router.get("/curriculum/login/", (req, res) => {
     });
 });
 
+
+router.get("/login/:numero_alumno", (req, res) => {
+    const numero_alumno = req.params.numero_alumno;
+    const key_alumno = getKey(numero_alumno);
+
+    if (!key_alumno) {
+        return res.status(400).json({
+            error: {
+                code: 400,
+                message: "Ingresa un número de alumno válido",
+                field: "numero_alumno",
+                value: numero_alumno
+            }
+        });
+    }
+
+    return res.json({
+        message: "Bienvenidx, tu key es la siguiente:",
+        key: key_alumno,
+        numero_alumno
+    });
+});
+
+
+
 module.exports = router;

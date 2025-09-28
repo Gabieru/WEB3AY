@@ -11,7 +11,7 @@ app.use(express.json());
 
 // RATE LIMIT ZONE
 
-const rateLimit = require("express-rate-limit");// importar helper
+const { rateLimit, ipKeyGenerator } = require("express-rate-limit");// importar helper
 
 const limiter = rateLimit({
     windowMs: 1 * 60 * 1000,

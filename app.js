@@ -11,16 +11,23 @@ app.use(express.json());
 
 // RATE LIMIT ZONE
 
-const rateLimit = require("express-rate-limit");
+const rateLimit = require("express-rate-limit");// importar helper
 
 const limiter = rateLimit({
     windowMs: 1 * 60 * 1000,
-    max: 10,
+    limit: 10,
     message: {
-        error: "Demasiadas solicitudes desde esta IP, intenta más tarde"
+        error: "Demasiadas solicitudes con esta API-Key, intenta más tarde"
+    },
+    keyGenerator: (req, res) => {
+        const apikey = req.header("Authorization");
+        if (apikey) {
+            return String(apikey);
+        }
+
+        return ipKeyGenerator(req);
     }
 });
-
 app.use(limiter);
 
 

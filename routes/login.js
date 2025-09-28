@@ -8,8 +8,8 @@ function getKey(numero_alumno) {
 }
 
 // Ruta de login
-router.get("/curriculum/login/:numero_alumno", (req, res) => {
-    const numero_alumno = req.params.numero_alumno;
+router.get("/curriculum/login/", (req, res) => {
+    const numero_alumno = req.header("Authorization");
     const key_alumno = getKey(numero_alumno);
 
     if (!key_alumno) {

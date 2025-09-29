@@ -8,7 +8,7 @@ router.post("/curriculum/post", authMiddleware, (req, res) => {
     const key = req.header("Authorization"); //KEY 
     // Lista de campos obligatorios
     const requiredFields = [
-        "Nombre", "Apellido", "Titulo", "Celular", "Email",
+        "Nombre", "Apellido", "Image", "Titulo", "Celular", "Email",
         "Ubicacion", "Perfil", "Lugar_trabajo", "Trabajo_1", "Trabajo_2",
         "Lugar_de_Estudios", "Estudios_1", "Estudios_2", "Idioma_1", "Idioma_2"
     ];
@@ -26,7 +26,7 @@ router.post("/curriculum/post", authMiddleware, (req, res) => {
     // Insertar en la base de datos
     const stmt = db.prepare(`
         INSERT INTO curriculum 
-        (key, Nombre, Apellido, Titulo, Celular, Email, Ubicacion, Perfil,
+        (key, Nombre, Apellido, Image, Titulo, Celular, Email, Ubicacion, Perfil,
          Lugar_trabajo, Trabajo_1, Trabajo_2, Lugar_de_Estudios, Estudios_1, Estudios_2,
          Idioma_1, Idioma_2)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -36,6 +36,7 @@ router.post("/curriculum/post", authMiddleware, (req, res) => {
         key,
         data.Nombre,
         data.Apellido,
+        data.Image,
         data.Titulo,
         data.Celular,
         data.Email,

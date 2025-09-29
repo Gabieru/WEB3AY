@@ -29,6 +29,7 @@ router.delete("/curriculum/delete/:id", authMiddleware, (req, res) => {
             `UPDATE curriculum SET 
                 Nombre = NULL,
                 Apellido = NULL,
+                Image = NULL,
                 Titulo = NULL,
                 Celular = NULL,
                 Email = NULL,

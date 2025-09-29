@@ -28,4 +28,7 @@ db.run(`CREATE TABLE IF NOT EXISTS curriculum (
   Idioma_2 TEXT
 )`);
 
+
+
 module.exports = db;
+

@@ -2,26 +2,21 @@ const express = require("express");
 const router = express.Router();
 const authMiddleware = require("../../auth.js");
 const db = require("../../database/db.js");
+const { check_fields } = require("../check_fields.js");
+
+
 
 router.post("/curriculum/post", authMiddleware, (req, res) => {
     const data = req.body;
     const key = req.header("Authorization"); //KEY 
-    // Lista de campos obligatorios
-    const requiredFields = [
-        "Nombre", "Apellido", "Image", "Titulo", "Celular", "Email",
-        "Ubicacion", "Perfil", "Lugar_trabajo", "Trabajo_1", "Trabajo_2",
-        "Lugar_de_Estudios", "Estudios_1", "Estudios_2", "Idioma_1", "Idioma_2"
-    ];
 
-    // Verificar si falta algún campo
-    const missingFields = requiredFields.filter(field => !data[field]);
-
+    const missingFields = check_fields(data);
     if (missingFields.length > 0) {
         return res.status(400).json({
             error: "Faltan campos obligatorios",
             missingFields
         });
-    }
+    };
 
     // Insertar en la base de datos
     const stmt = db.prepare(`
@@ -29,7 +24,7 @@ router.post("/curriculum/post", authMiddleware, (req, res) => {
         (key, Nombre, Apellido, Image, Titulo, Celular, Email, Ubicacion, Perfil,
          Lugar_trabajo, Trabajo_1, Trabajo_2, Lugar_de_Estudios, Estudios_1, Estudios_2,
          Idioma_1, Idioma_2)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     stmt.run(

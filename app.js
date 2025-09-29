@@ -3,8 +3,8 @@ const app = express();
 const loginRouter = require("./routes/login.js");
 const getRouter = require("./routes/curriculum/get.js");
 const postRouter = require("./routes/curriculum/post.js");
-//const patchRouter = require("./routes/curriculum/patch.js");
-//const putRouter = require("./routes/curriculum/put.js");
+const patchRouter = require("./routes/curriculum/patch.js");
+const putRouter = require("./routes/curriculum/put.js");
 const deleteRouter = require("./routes/curriculum/delete.js");
 app.use(express.json());
 
@@ -14,8 +14,8 @@ app.use(express.json());
 const { rateLimit, ipKeyGenerator } = require("express-rate-limit");// importar helper
 
 const limiter = rateLimit({
-    windowMs: 1 * 60 * 1000,
-    limit: 10,
+    windowMs: 2 * 60 * 1000,
+    limit: 20,
     message: {
         error: "Demasiadas solicitudes con esta API-Key, intenta más tarde"
     },
@@ -36,8 +36,8 @@ app.use(limiter);
 app.use(limiter, loginRouter);
 app.use(limiter, getRouter);
 app.use(limiter, postRouter);
-//app.use(limiter, patchRouter);
-//app.use(limiter, putRouter);
+app.use(limiter, patchRouter);
+app.use(limiter, putRouter);
 app.use(limiter, deleteRouter);
 
 

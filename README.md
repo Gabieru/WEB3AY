@@ -56,6 +56,34 @@ Este repositorio almacena todo lo necesario para poder correr la API necesaria p
    #Para arrancar el servidor con ngrok, desde otra terminal debes correr:
    npx ngrok http XXXX <Cambiar por el puerto asignado>
    ```
-
+# Diagrama Api y Base de datos:
+   ![Diagrama de Consulta](assets/curriculumdb.png)
 # Metodos de la API:
- --WIP--
+#### Obtener la user-key
+
+<details>
+ <summary><code>GET</code> <code><b>/{numero_alumno}</b></code> <code>(Te entrega la key que necesitas para futuras consultas)</code></summary>
+
+##### Parameters
+
+> | name      |  type     | data type               | description                                                           |
+> |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
+> | numero_alumno      |  required | string   | Numero de alumno del quien hace la consulta  |
+
+
+##### Responses
+
+> | http code     | content-type                      | response                                                            |
+> |---------------|-----------------------------------|---------------------------------------------------------------------|
+> | `200`         | `json`        | `{message: "", "key": apikey, "numero_alumno": params.numero_alumno}`                                |
+> | `400`         | `json`                | `{"code":"400","message":"ingresa un número de alumno válido", field: "numero_alumno", "value": params.value }`                            |                                                           |
+
+##### Example cURL
+
+> ```javascript
+>  curl -X GET "http://localhost:8889/12345" -H "Content-Type: application/json"
+> ```
+
+</details>
+
+------------------------------------------------------------------------------------------

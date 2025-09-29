@@ -56,6 +56,7 @@ Este repositorio almacena todo lo necesario para poder correr la API necesaria p
    #Para arrancar el servidor con ngrok, desde otra terminal debes correr:
    npx ngrok http XXXX <Cambiar por el puerto asignado>
    ```
-
+# Diagrama Api y Base de datos:
+   ![Diagrama de Consulta](assets/curriculumdb.png)
 # Metodos de la API:
  --WIP--

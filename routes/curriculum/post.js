@@ -4,11 +4,9 @@ const authMiddleware = require("../../auth.js");
 const db = require("../../database/db.js");
 const { check_fields } = require("../check_fields.js");
 
-
-
-router.post("/curriculum/post", authMiddleware, (req, res) => {
+router.post("/curriculum", authMiddleware, (req, res) => {
     const data = req.body;
-    const key = req.header("Authorization"); //KEY 
+    const key = req.header("Authorization");
 
     const missingFields = check_fields(data);
     if (missingFields.length > 0) {
@@ -16,9 +14,8 @@ router.post("/curriculum/post", authMiddleware, (req, res) => {
             error: "Faltan campos obligatorios",
             missingFields
         });
-    };
+    }
 
-    // Insertar en la base de datos
     const stmt = db.prepare(`
         INSERT INTO curriculum 
         (key, Nombre, Apellido, Image, Titulo, Celular, Email, Ubicacion, Perfil,
@@ -49,7 +46,7 @@ router.post("/curriculum/post", authMiddleware, (req, res) => {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-            res.json({
+            res.status(201).json({
                 message: "Curriculum agregado, está asociado a la key",
                 key: key,
                 id: this.lastID,

@@ -3,7 +3,7 @@ const router = express.Router();
 const authMiddleware = require("../../auth.js");
 const db = require("../../database/db.js");
 
-router.get("/curriculum/get/:id", authMiddleware, (req, res) => {
+router.get("/curriculum/:id", authMiddleware, (req, res) => {
     const id = req.params.id;
     const userKey = req.header("Authorization"); //KEY 
 

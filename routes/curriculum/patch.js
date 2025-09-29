@@ -1,4 +1,4 @@
-// Actualización parcial: patch
+// Actualización completa: PUT
 const express = require("express");
 const router = express.Router();
 const authMiddleware = require("../../auth.js");
@@ -14,6 +14,14 @@ router.patch("/curriculum/patch/:id", authMiddleware, (req, res) => {
     const data = req.body;
     const key = req.header("Authorization");
 
+    // Reviso campos vacios
+    const missingFields = check_fields(data);
+    if (missingFields.length > 0) {
+        return res.status(400).json({
+            error: "Faltan campos obligatorios",
+            missingFields
+        });
+    }
     const params = fields.map(f => data[f] !== undefined ? data[f] : null);
 
     const sql = `

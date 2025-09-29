@@ -1,4 +1,4 @@
-// Put: actualización completa.
+// Put: actualización Parcial.
 const express = require("express");
 const router = express.Router();
 const authMiddleware = require("../../auth.js");
@@ -17,14 +17,6 @@ router.put("/curriculum/put/:id", authMiddleware, (req, res) => {
 
     if (!userKey) {
         return res.status(400).json({ error: "Falta la API key en el header" });
-    }
-    // Reviso campos vacios
-    const missingFields = check_fields(data);
-    if (missingFields.length > 0) {
-        return res.status(400).json({
-            error: "Faltan campos obligatorios",
-            missingFields
-        });
     }
 
     db.get("SELECT * FROM curriculum WHERE id = ?", [id], (err, row) => {

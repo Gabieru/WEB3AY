@@ -6,7 +6,7 @@ function getCurriculumIdsByKey(userKey, callback) {
     }
 
     const query = `
-        SELECT id, name, apellido
+        SELECT id, Nombre, apellido
         FROM curriculum 
         WHERE key = ? AND Nombre IS NOT NULL AND Apellido IS NOT NULL
     `;

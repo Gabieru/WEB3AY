@@ -17,7 +17,7 @@ function normalizeValue(v) {
     return v;
 }
 
-router.put("/curriculum/put/:id", authMiddleware, (req, res) => {
+router.put("/curriculum/:id", authMiddleware, (req, res) => {
     const id = req.params.id;
     const userKey = req.header("Authorization");
     const data = req.body || {};

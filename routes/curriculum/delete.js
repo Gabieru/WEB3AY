@@ -4,7 +4,7 @@ const db = require("../../database/db");
 const authMiddleware = require("../../auth.js");
 
 
-router.delete("/curriculum/delete/:id", authMiddleware, (req, res) => {
+router.delete("/curriculum/:id", authMiddleware, (req, res) => {
     const id = req.params.id;
     const userKey = req.header("Authorization");
 

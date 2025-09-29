@@ -4,7 +4,7 @@ const authMiddleware = require("../../auth.js");
 const db = require("../../database/db.js");
 const { check_fields } = require("../check_fields.js");
 
-router.post("/curriculum/post", authMiddleware, (req, res) => {
+router.post("/curriculum", authMiddleware, (req, res) => {
     const data = req.body;
     const key = req.header("Authorization");
 

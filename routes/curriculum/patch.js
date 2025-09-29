@@ -9,7 +9,7 @@ const fields = [
     "Lugar_de_Estudios", "Estudios_1", "Estudios_2", "Idioma_1", "Idioma_2"
 ];
 
-router.patch("/curriculum/patch/:id", authMiddleware, (req, res) => {
+router.patch("/curriculum/:id", authMiddleware, (req, res) => {
     const id = req.params.id;
     const data = req.body;
     const key = req.header("Authorization");

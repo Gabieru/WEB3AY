@@ -13,7 +13,6 @@ db.run(`CREATE TABLE IF NOT EXISTS curriculum (
   Nombre_curriculum TEXT NOT NULL,
   Nombre TEXT,
   Apellido TEXT,
-  Image TEXT,
   Titulo TEXT,
   Celular TEXT,
   Email TEXT,

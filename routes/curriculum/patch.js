@@ -4,7 +4,7 @@ const router = express.Router();
 const authMiddleware = require("../../auth.js");
 const db = require("../../database/db.js");
 const fields = [
-    "Nombre", "Apellido", "Image", "Titulo", "Celular", "Email",
+    "Nombre", "Apellido", "Titulo", "Celular", "Email",
     "Ubicacion", "Perfil", "Lugar_trabajo", "Trabajo_1", "Trabajo_2",
     "Lugar_de_Estudios", "Estudios_1", "Estudios_2", "Idioma_1", "Idioma_2"
 ];

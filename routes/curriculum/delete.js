@@ -69,7 +69,6 @@ router.delete("/curriculum/:Nombre_curriculum", authMiddleware, (req, res) => {
                 Nombre_curriculum = NULL,
                 Nombre = NULL,
                 Apellido = NULL,
-                Image = NULL,
                 Titulo = NULL,
                 Celular = NULL,
                 Email = NULL,

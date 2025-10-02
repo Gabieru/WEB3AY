@@ -18,8 +18,6 @@
  *                 type: string
  *               Apellido:
  *                 type: string
- *               Image:
- *                 type: string
  *               Titulo:
  *                 type: string
  *               Celular:
@@ -117,7 +115,7 @@ router.post("/curriculum", authMiddleware, (req, res) => {
 
         const stmt = db.prepare(`
             INSERT INTO curriculum 
-            (key, Nombre_curriculum, Nombre, Apellido, Image, Titulo, Celular, Email, Ubicacion, Perfil,
+            (key, Nombre_curriculum, Nombre, Apellido, Titulo, Celular, Email, Ubicacion, Perfil,
              Lugar_trabajo, Trabajo_1, Trabajo_2, Lugar_de_Estudios, Estudios_1, Estudios_2,
              Idioma_1, Idioma_2)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -128,7 +126,6 @@ router.post("/curriculum", authMiddleware, (req, res) => {
             data.Nombre_curriculum,
             data.Nombre,
             data.Apellido,
-            data.Image,
             data.Titulo,
             data.Celular,
             data.Email,

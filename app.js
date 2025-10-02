@@ -6,6 +6,10 @@ const postRouter = require("./routes/curriculum/post.js");
 const patchRouter = require("./routes/curriculum/patch.js");
 const putRouter = require("./routes/curriculum/put.js");
 const deleteRouter = require("./routes/curriculum/delete.js");
+const { swaggerUi, swaggerSpec } = require("./swagger.js");
+
+// SWAGGER DOCS ZONE
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(express.json());
 
 // CORS ZONE

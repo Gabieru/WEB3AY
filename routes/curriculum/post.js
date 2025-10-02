@@ -1,3 +1,88 @@
+/**
+ * @swagger
+ * /curriculum:
+ *   post:
+ *     summary: Crea un nuevo curriculum asociado a un usuario
+ *     tags:
+ *       - Curriculum
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               Nombre_curriculum:
+ *                 type: string
+ *               Nombre:
+ *                 type: string
+ *               Apellido:
+ *                 type: string
+ *               Titulo:
+ *                 type: string
+ *               Celular:
+ *                 type: string
+ *               Email:
+ *                 type: string
+ *               Ubicacion:
+ *                 type: string
+ *               Perfil:
+ *                 type: string
+ *               Lugar_trabajo:
+ *                 type: string
+ *               Trabajo_1:
+ *                 type: string
+ *               Trabajo_2:
+ *                 type: string
+ *               Lugar_de_Estudios:
+ *                 type: string
+ *               Estudios_1:
+ *                 type: string
+ *               Estudios_2:
+ *                 type: string
+ *               Idioma_1:
+ *                 type: string
+ *               Idioma_2:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Curriculum creado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 key:
+ *                   type: string
+ *                 id:
+ *                   type: integer
+ *                 curriculum:
+ *                   type: object
+ *       400:
+ *         description: Faltan campos obligatorios
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                 missingFields:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *       409:
+ *         description: Ya existe un curriculum con ese Nombre_curriculum
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
 const express = require("express");
 const router = express.Router();
 const authMiddleware = require("../../auth.js");
@@ -30,10 +115,10 @@ router.post("/curriculum", authMiddleware, (req, res) => {
 
         const stmt = db.prepare(`
             INSERT INTO curriculum 
-            (key, Nombre_curriculum, Nombre, Apellido, Image, Titulo, Celular, Email, Ubicacion, Perfil,
+            (key, Nombre_curriculum, Nombre, Apellido, Titulo, Celular, Email, Ubicacion, Perfil,
              Lugar_trabajo, Trabajo_1, Trabajo_2, Lugar_de_Estudios, Estudios_1, Estudios_2,
              Idioma_1, Idioma_2)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `);
 
         stmt.run(
@@ -41,7 +126,6 @@ router.post("/curriculum", authMiddleware, (req, res) => {
             data.Nombre_curriculum,
             data.Nombre,
             data.Apellido,
-            data.Image,
             data.Titulo,
             data.Celular,
             data.Email,

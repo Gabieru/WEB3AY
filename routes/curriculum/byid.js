@@ -6,9 +6,9 @@ function getCurriculumsByKey(userKey, callback) {
     }
 
     const query = `
-        SELECT id, Nombre_usuario
+        SELECT id, Nombre_curriculum
         FROM curriculum 
-        WHERE key = ? AND Nombre IS NOT NULL AND Apellido IS NOT NULL
+        WHERE key = ? AND Nombre_curriculum IS NOT NULL
     `;
 
     db.all(query, [userKey], (err, rows) => {

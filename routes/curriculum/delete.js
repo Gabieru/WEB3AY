@@ -4,16 +4,15 @@ const db = require("../../database/db");
 const authMiddleware = require("../../auth.js");
 
 
-router.delete("/curriculum/:name", authMiddleware, (req, res) => {
-    const name = req.params.name;
+router.delete("/curriculum/:Nombre_curriculum", authMiddleware, (req, res) => {
+    const Nombre_curriculum = req.params.Nombre_curriculum;
     const userKey = req.header("Authorization");
 
     if (!userKey) {
         return res.status(400).json({ error: "Falta la API key en el header" });
     }
 
-    // Buscamos curriculum por Nombre + key
-    db.get("SELECT * FROM curriculum WHERE key = ? AND Nombre = ?", [userKey, name], (err, row) => {
+    db.get("SELECT * FROM curriculum WHERE key = ? AND Nombre_curriculum = ?", [userKey, Nombre_curriculum], (err, row) => {
         if (err) return res.status(500).json({ error: err.message });
         if (!row) return res.status(404).json({ error: "Curriculum no encontrado para este nombre y key" });
 
@@ -23,6 +22,7 @@ router.delete("/curriculum/:name", authMiddleware, (req, res) => {
 
         db.run(
             `UPDATE curriculum SET 
+                Nombre_curriculum = NULL,
                 Nombre = NULL,
                 Apellido = NULL,
                 Image = NULL,
@@ -40,10 +40,10 @@ router.delete("/curriculum/:name", authMiddleware, (req, res) => {
                 Idioma_1 = NULL,
                 Idioma_2 = NULL
              WHERE key = ? AND Nombre = ?`,
-            [userKey, name],
+            [userKey, Nombre_curriculum],
             function (err) {
                 if (err) return res.status(500).json({ error: err.message });
-                res.json({ message: "Curriculum eliminado correctamente", name });
+                res.json({ message: "Curriculum eliminado correctamente", Nombre_curriculum });
             }
         );
     });

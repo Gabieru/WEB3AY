@@ -3,7 +3,51 @@ const router = express.Router();
 const db = require("../../database/db");
 const authMiddleware = require("../../auth.js");
 
-
+/**
+ * @swagger
+ * /curriculum/{Nombre_curriculum}:
+ *   delete:
+ *     summary: Elimina un curriculum por Nombre_curriculum y API key del usuario
+ *     tags:
+ *       - Curriculum
+ *     parameters:
+ *       - in: path
+ *         name: Nombre_curriculum
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Nombre del curriculum
+ *     responses:
+ *       200:
+ *         description: Curriculum eliminado correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 Nombre_curriculum:
+ *                   type: string
+ *       400:
+ *         description: Falta la API key
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *       404:
+ *         description: Curriculum no encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
 router.delete("/curriculum/:Nombre_curriculum", authMiddleware, (req, res) => {
     const Nombre_curriculum = req.params.Nombre_curriculum;
     const userKey = req.header("Authorization");

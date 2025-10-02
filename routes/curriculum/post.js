@@ -16,15 +16,15 @@ router.post("/curriculum", authMiddleware, (req, res) => {
         });
     }
 
-    const checkSql = `SELECT id FROM curriculum WHERE Nombre_curriculum = ?`;
-    db.get(checkSql, [data.Nombre_curriculum], (err, row) => {
+    const checkSql = `SELECT id FROM curriculum WHERE Nombre_curriculum = ? AND key = ?`;
+    db.get(checkSql, [data.Nombre_curriculum, key], (err, row) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
 
         if (row) {
             return res.status(409).json({
-                error: `Ya existe un curriculum con el Nombre_curriculum '${data.Nombre_curriculum}'`
+                error: `Ya existe un curriculum con el Nombre_curriculum '${data.Nombre_curriculum}' para esta key`
             });
         }
 

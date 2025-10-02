@@ -10,7 +10,7 @@ const options = {
             description: 'API para gestión de curriculums',
         },
         servers: [
-            { url: 'http://localhost:3000' }
+            { url: 'http://iic1005api3.ing.uc.cl' }
         ],
         components: {
             securitySchemes: {

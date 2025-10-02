@@ -3,31 +3,29 @@ const router = express.Router();
 const authMiddleware = require("../../auth.js");
 const db = require("../../database/db.js");
 
-router.get("/curriculum/:id", authMiddleware, (req, res) => {
-    const id = req.params.id;
-    const userKey = req.header("Authorization"); //KEY 
+router.get("/curriculum/:username", authMiddleware, (req, res) => {
+    const username = req.params.username; // ahora es Nombre_usuario
+    const userKey = req.header("Authorization");
 
     if (!userKey) {
         return res.status(400).json({ error: "Falta la API key en el header" });
     }
 
-    db.get("SELECT * FROM curriculum WHERE id = ?", [id], (err, row) => {
+    const sql = "SELECT * FROM curriculum WHERE key = ? AND Nombre_usuario = ?";
+    db.get(sql, [userKey, username], (err, row) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
         if (!row) {
-            return res.status(404).json({ error: "Curriculum no encontrado" });
-        }
-
-        if (row.key !== userKey) {
-            return res.status(403).json({
-                error: "Key inválida, el curriculum no está asociado a tu auth-key"
+            return res.status(404).json({
+                error: "Curriculum no encontrado para este Nombre_usuario y key"
             });
         }
+
         if (!row.Nombre && !row.Apellido) {
             return res.json({ message: "Este curriculum fue eliminado :(" });
         }
-        // Si todo esta bien, devuelvo el curriculum
+
         res.json(row);
     });
 });
@@ -35,14 +33,14 @@ router.get("/curriculum/:id", authMiddleware, (req, res) => {
 
 
 
-const { getCurriculumIdsByKey } = require("./byid.js");
-router.get("/curriculum/mios", authMiddleware, (req, res) => {
+const { getCurriculumsByKey } = require("./byid.js");
+router.get("/curriculums", authMiddleware, (req, res) => {
     const userKey = req.header("Authorization");
 
-    getCurriculumIdsByKey(userKey, (err, ids) => {
+    getCurriculumsByKey(userKey, (err, curriculums) => {
         if (err) return res.status(500).json({ error: err.message });
 
-        res.json({ curriculumIds: ids });
+        res.json({ curriculums });
     });
 });
 

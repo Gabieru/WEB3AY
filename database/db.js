@@ -10,6 +10,7 @@ const db = new sqlite3.Database("database/curriculums.db", (err) => {
 db.run(`CREATE TABLE IF NOT EXISTS curriculum (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   key TEXT NOT NULL,
+  Nombre_usuario TEXT NOT NULL,
   Nombre TEXT,
   Apellido TEXT,
   Image TEXT,

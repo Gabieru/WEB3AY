@@ -118,7 +118,7 @@ router.post("/curriculum", authMiddleware, (req, res) => {
             (key, Nombre_curriculum, Nombre, Apellido, Titulo, Celular, Email, Ubicacion, Perfil,
              Lugar_trabajo, Trabajo_1, Trabajo_2, Lugar_de_Estudios, Estudios_1, Estudios_2,
              Idioma_1, Idioma_2)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `);
 
         stmt.run(
